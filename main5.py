@@ -53,7 +53,7 @@ def delete_data(todo_id:int):
             todos.pop(index)
             return{
                 "Message":"Data Deleted",
-                "data" : todos
+                "current data after deletion" : todos
             }
     return {
         "error" : "Todo not found in todos"
