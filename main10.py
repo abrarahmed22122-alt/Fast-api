@@ -4,15 +4,15 @@
 from fastapi import FastAPI, Depends, Header, HTTPException
 app = FastAPI()
 
-# def reduce_repetition():
-#     name = "abrar"
-#     return {
-#         "Message" : name
-#     }
+def reduce_repetition():
+    name = "abrar"
+    return {
+        "Message" : name
+    }
 
-# @app.get("/reusablelogic")
-# def return_same_logic(data:str = Depends(reduce_repetition)):
-#     return  data
+@app.get("/reusablelogic")
+def return_same_logic(data:str = Depends(reduce_repetition)):
+    return  data
 
 def verify_token(token:str=Header(None)):
     if token != "mytoken":
