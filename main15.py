@@ -51,3 +51,25 @@ def get(user_id=int,db:Session=Depends(get_db)):
             status_code = 404,detail = "Todo not found")
     return todo
         
+@app.put("/update/{user_id}")
+def update(
+    user_id: int, 
+    Name: str,         
+    Standard: str, 
+    dob: int,
+    db: Session = Depends(get_db)):
+    todo = db.query(User).filter(User.id==user_id).first()
+    if not todo:
+        raise HTTPException(
+            status_code = 404,
+            detail = "Todo not found"
+        )
+    todo.Name = Name
+    todo.Standard = Standard
+    todo.dob = dob
+    db.commit()
+    db.refresh(todo)
+    return {
+        "Message" : "Todo is updated Successfully",
+        "Data" : todo
+}
